@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  submitted_by_user: one
+  external_link: MyString
+  title: MyString
+  description_text: MyText
+  price: 9.99
+  currency: MyString
+  category: one
+  verification_status: MyString
+  ai_score_authenticity: 1.5
+  ai_uncertainty_message: MyText
+
+two:
+  submitted_by_user: two
+  external_link: MyString
+  title: MyString
+  description_text: MyText
+  price: 9.99
+  currency: MyString
+  category: two
+  verification_status: MyString
+  ai_score_authenticity: 1.5
+  ai_uncertainty_message: MyText
