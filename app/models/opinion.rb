@@ -21,4 +21,13 @@ class Opinion < ApplicationRecord
   def update_score!
     update(score: opinion_votes.sum(:vote_type))
   end
+
+  # Ransack configuration for Active Admin
+  def self.ransackable_attributes(auth_object = nil)
+    [ "id", "content", "author_type", "verdict", "score", "auction_id", "user_id", "created_at", "updated_at" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "auction", "user", "opinion_votes" ]
+  end
 end

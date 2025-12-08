@@ -16,4 +16,13 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :role, presence: true
+
+  # Ransack configuration for Active Admin
+  def self.ransackable_attributes(auth_object = nil)
+    [ "id", "username", "email", "role", "created_at", "updated_at" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "auctions", "opinions", "expert_categories", "user_expert_categories", "opinion_votes" ]
+  end
 end
