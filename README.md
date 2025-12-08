@@ -34,10 +34,6 @@ This will create sample data:
 - Opinion votes
 - AI analysis history
 
-**Default credentials:**
-- Username: `admin`, `expert_furniture`, `expert_ceramics`, `john_doe`
-- Password: `password123` (for all users)
-
 ## Running the Application
 
 Start the development server:

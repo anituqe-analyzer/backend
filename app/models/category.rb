@@ -6,4 +6,13 @@ class Category < ApplicationRecord
   has_many :experts, through: :user_expert_categories, source: :user
 
   validates :name, presence: true, uniqueness: true
+
+  # Ransack configuration for Active Admin
+  def self.ransackable_attributes(auth_object = nil)
+    [ "id", "name", "description", "parent_id", "created_at", "updated_at" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "parent", "children", "auctions", "experts", "user_expert_categories" ]
+  end
 end
