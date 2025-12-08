@@ -1,6 +1,6 @@
 # Antique Analyzer
 
-A student project - Rails application for antique analysis.
+A rails project - Rails application for antique analysis.
 
 ## Requirements
 
