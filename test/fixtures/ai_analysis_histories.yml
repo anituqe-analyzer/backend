@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  auction: one
+  model_version: MyString
+  ai_score_authenticity: 1.5
+  ai_raw_result: MyText
+  ai_decision: MyString
+  message: MyText
+
+two:
+  auction: two
+  model_version: MyString
+  ai_score_authenticity: 1.5
+  ai_raw_result: MyText
+  ai_decision: MyString
+  message: MyText
