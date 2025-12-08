@@ -21,10 +21,22 @@ rails db:create
 rails db:migrate
 ```
 
-3. (Optional) Load seed data:
+3. Load seed data:
 ```bash
 rails db:seed
 ```
+
+This will create sample data:
+- 4 users (admin, 2 experts, 1 regular user)
+- 5 categories (including hierarchical structure)
+- 5 auctions with different verification statuses
+- 4 opinions from experts and users
+- Opinion votes
+- AI analysis history
+
+**Default credentials:**
+- Username: `admin`, `expert_furniture`, `expert_ceramics`, `john_doe`
+- Password: `password123` (for all users)
 
 ## Running the Application
 
