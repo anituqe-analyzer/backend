@@ -1,24 +1,43 @@
-# README
+# Antique Analyzer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A student project - Rails application for antique analysis.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 3.4.4
+- Rails 8.1.1
+- SQLite3
 
-* System dependencies
+## Installation
 
-* Configuration
+1. Install dependencies:
+```bash
+bundle install
+```
 
-* Database creation
+2. Create database:
+```bash
+rails db:create
+rails db:migrate
+```
 
-* Database initialization
+3. (Optional) Load seed data:
+```bash
+rails db:seed
+```
 
-* How to run the test suite
+## Running the Application
 
-* Services (job queues, cache servers, search engines, etc.)
+Start the development server:
+```bash
+rails server
+```
 
-* Deployment instructions
+The application will be available at: http://localhost:3000
 
-* ...
+## Tests
+
+Run tests:
+```bash
+rails test
+```
