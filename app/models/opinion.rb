@@ -3,12 +3,12 @@ class Opinion < ApplicationRecord
   belongs_to :user
   has_many :opinion_votes, dependent: :destroy
 
-  enum author_type: {
+  enum :author_type, {
     user: "user",
     expert: "expert"
   }
 
-  enum verdict: {
+  enum :verdict, {
     authentic: "authentic",
     fake: "fake",
     unsure: "unsure"
