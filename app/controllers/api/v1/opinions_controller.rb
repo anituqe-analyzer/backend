@@ -8,7 +8,6 @@ module Api
       before_action :set_auction, only: [ :index, :create ]
       before_action :set_opinion, only: [ :show, :update, :destroy ]
 
-      # GET /api/v1/auctions/:auction_id/opinions
       def index
         @opinions = @auction.opinions.includes(:user, :opinion_votes).order(created_at: :desc)
 
@@ -17,12 +16,10 @@ module Api
         }, status: :ok
       end
 
-      # GET /api/v1/opinions/:id
       def show
         render json: opinion_json(@opinion), status: :ok
       end
 
-      # POST /api/v1/auctions/:auction_id/opinions
       def create
         @opinion = @auction.opinions.build(opinion_params)
         @opinion.user = @current_user
@@ -35,7 +32,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /api/v1/opinions/:id
       def update
         unless @opinion.user_id == @current_user.id
           render json: { error: "Unauthorized" }, status: :forbidden
@@ -49,7 +45,6 @@ module Api
         end
       end
 
-      # DELETE /api/v1/opinions/:id
       def destroy
         unless @opinion.user_id == @current_user.id || @current_user.admin?
           render json: { error: "Unauthorized" }, status: :forbidden
@@ -95,8 +90,7 @@ module Api
             title: opinion.auction.title
           },
           votes_count: opinion.opinion_votes.count,
-          created_at: opinion.created_at,
-          updated_at: opinion.updated_at
+          created_at: opinion.created_at
         }
       end
     end

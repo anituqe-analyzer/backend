@@ -7,13 +7,10 @@ module Api
       before_action :authorize_request
       before_action :set_opinion
 
-      # POST /api/v1/opinions/:opinion_id/votes
       def create
-        # Check if user already voted
         existing_vote = @opinion.opinion_votes.find_by(user: @current_user)
 
         if existing_vote
-          # Update existing vote
           if existing_vote.update(vote_type: vote_params[:vote_type])
             @opinion.update_score!
             render json: vote_json(existing_vote), status: :ok
@@ -21,7 +18,6 @@ module Api
             render json: { errors: existing_vote.errors.full_messages }, status: :unprocessable_entity
           end
         else
-          # Create new vote
           @vote = @opinion.opinion_votes.build(vote_params)
           @vote.user = @current_user
 
@@ -34,7 +30,6 @@ module Api
         end
       end
 
-      # DELETE /api/v1/opinions/:opinion_id/votes
       def destroy
         @vote = @opinion.opinion_votes.find_by(user: @current_user)
 
@@ -64,8 +59,7 @@ module Api
           id: vote.id,
           vote_type: vote.vote_type,
           opinion_id: vote.opinion_id,
-          user_id: vote.user_id,
-          created_at: vote.created_at
+          user_id: vote.user_id
         }
       end
     end

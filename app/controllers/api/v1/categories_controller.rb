@@ -3,7 +3,6 @@ module Api
     class CategoriesController < ApplicationController
       skip_before_action :verify_authenticity_token
 
-      # GET /api/v1/categories
       def index
         @categories = Category.includes(:parent, :children).order(:name)
 
@@ -12,7 +11,6 @@ module Api
         }, status: :ok
       end
 
-      # GET /api/v1/categories/:id
       def show
         @category = Category.includes(:parent, :children, :auctions).find(params[:id])
 
@@ -29,8 +27,7 @@ module Api
           name: category.name,
           description: category.description,
           parent: category.parent ? { id: category.parent.id, name: category.parent.name } : nil,
-          children: category.children.map { |child| { id: child.id, name: child.name } },
-          created_at: category.created_at
+          children: category.children.map { |child| { id: child.id, name: child.name } }
         }
 
         if include_auctions
