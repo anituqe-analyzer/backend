@@ -1,6 +1,7 @@
 # Antique Analyzer
 
 A rails project - Rails application for antique analysis.
+https://guides.rubyonrails.org/install_ruby_on_rails.html
 
 ## Requirements
 
