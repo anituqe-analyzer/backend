@@ -25,7 +25,6 @@
 - [ ] Test CRUD operations
 
 ## Phase 4: Authentication (later)
-- [ ] Add Devise
 - [ ] Integrate with Active Admin
 - [ ] User registration/login
 
