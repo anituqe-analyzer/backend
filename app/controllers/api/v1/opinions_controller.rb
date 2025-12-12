@@ -4,7 +4,7 @@ module Api
       include JwtAuthenticatable
 
       skip_before_action :verify_authenticity_token
-      before_action :authorize_request
+      before_action :authorize_request, except: [ :index, :show ]
       before_action :set_auction, only: [ :index, :create ]
       before_action :set_opinion, only: [ :show, :update, :destroy ]
 
