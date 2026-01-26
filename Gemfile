@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.1"
+gem "rails", "~> 8.1.2"
 # Use Sprockets for asset pipeline (required for Active Admin)
 gem "sprockets-rails"
 gem "sassc-rails"
