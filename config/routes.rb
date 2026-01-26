@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :opinions, only: [ :show, :update, :destroy ] do
         resource :vote, controller: "opinion_votes", only: [ :create, :destroy ]
       end
+
+      get "validate_url", to: "check_auction#validate"
     end
   end
 
