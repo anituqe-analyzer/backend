@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_08_183611) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_07_123000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -51,6 +51,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_08_183611) do
     t.index ["auction_id"], name: "index_ai_analysis_histories_on_auction_id"
   end
 
+  create_table "auction_images", force: :cascade do |t|
+    t.integer "auction_id", null: false
+    t.datetime "created_at", null: false
+    t.boolean "deleted", default: false, null: false
+    t.string "image_url"
+    t.datetime "updated_at", null: false
+    t.index ["auction_id"], name: "index_auction_images_on_auction_id"
+  end
+
   create_table "auctions", force: :cascade do |t|
     t.float "ai_score_authenticity"
     t.text "ai_uncertainty_message"
@@ -81,10 +90,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_08_183611) do
 
   create_table "image_analyses", force: :cascade do |t|
     t.text "ai_detected_features"
-    t.integer "blob_id", null: false
+    t.integer "auction_id", null: false
     t.datetime "created_at", null: false
+    t.text "image_urls"
     t.datetime "updated_at", null: false
-    t.index ["blob_id"], name: "index_image_analyses_on_blob_id"
+    t.index ["auction_id"], name: "index_image_analyses_on_auction_id"
   end
 
   create_table "opinion_votes", force: :cascade do |t|
@@ -106,7 +116,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_08_183611) do
     t.integer "score", default: 0
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.string "verdict", null: false
+    t.string "verdict"
     t.index ["auction_id", "user_id"], name: "index_opinions_on_auction_id_and_user_id"
     t.index ["auction_id"], name: "index_opinions_on_auction_id"
     t.index ["user_id"], name: "index_opinions_on_user_id"
@@ -136,10 +146,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_08_183611) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ai_analysis_histories", "auctions"
+  add_foreign_key "auction_images", "auctions"
   add_foreign_key "auctions", "categories"
   add_foreign_key "auctions", "users", column: "submitted_by_user_id"
   add_foreign_key "categories", "categories", column: "parent_id"
-  add_foreign_key "image_analyses", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "image_analyses", "auctions"
   add_foreign_key "opinion_votes", "opinions"
   add_foreign_key "opinion_votes", "users"
   add_foreign_key "opinions", "auctions"

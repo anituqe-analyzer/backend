@@ -4,6 +4,8 @@ module Api
   module V1
     class CheckAuctionController < ApplicationController
       skip_before_action :verify_authenticity_token
+      include JwtAuthenticatable
+      before_action :authorize_request
 
       def validate
         auction_url = params[:auction_url]
@@ -13,7 +15,7 @@ module Api
           return
         end
 
-        validation_service = UrlValidationService.new(auction_url)
+        validation_service = UrlValidationService.new(auction_url, user: @current_user)
         result = validation_service.call
 
         if result[:error]

@@ -1,14 +1,15 @@
 class ImageAnalysis < ApplicationRecord
-  belongs_to :blob, class_name: "ActiveStorage::Blob"
+  belongs_to :auction
 
-  serialize :ai_detected_features, coder: JSON
+  serialize :ai_detected_features, JSON
+  serialize :image_urls, Array
 
   # Ransack configuration for Active Admin
   def self.ransackable_attributes(auth_object = nil)
-    [ "id", "blob_id", "created_at", "updated_at" ]
+    [ "id", "auction_id", "created_at", "updated_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "blob" ]
+    [ "auction" ]
   end
 end

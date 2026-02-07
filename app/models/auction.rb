@@ -4,6 +4,7 @@ class Auction < ApplicationRecord
   has_many_attached :images
   has_many :opinions, dependent: :destroy
   has_many :ai_analysis_histories, dependent: :destroy
+  has_many :auction_images, dependent: :destroy
 
   enum :verification_status, {
     pending: "pending",
@@ -24,6 +25,6 @@ class Auction < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "category", "submitted_by_user", "opinions", "ai_analysis_histories", "images_attachments", "images_blobs" ]
+    [ "category", "submitted_by_user", "opinions", "ai_analysis_histories", "images_attachments", "images_blobs", "auction_images" ]
   end
 end

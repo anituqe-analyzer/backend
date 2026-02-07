@@ -17,17 +17,11 @@ module JwtAuthenticatable
 
   def encode_token(payload)
     payload[:exp] = 24.hours.from_now.to_i
-    JWT.encode(payload, secret_key)
+    JWT.encode(payload, Rails.application.credentials.secret_key_base)
   end
 
   def decode_token(token)
-    decoded = JWT.decode(token, secret_key, true, { verify_expiration: true })[0]
+    decoded = JWT.decode(token, Rails.application.credentials.secret_key_base, true, { verify_expiration: true })[0]
     HashWithIndifferentAccess.new(decoded)
-  end
-
-  private
-
-  def secret_key
-    Rails.application.credentials.secret_key_base || Rails.application.secret_key_base
   end
 end

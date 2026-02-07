@@ -8,7 +8,7 @@ module Api
       before_action :set_auction, only: [ :show, :update, :destroy ]
 
       def index
-        @auctions = Auction.includes(:category, :submitted_by_user, images_attachments: :blob)
+        @auctions = Auction.includes(:category, :submitted_by_user, :auction_images, images_attachments: :blob)
                            .order(created_at: :desc)
                            .page(params[:page])
                            .per(params[:per_page] || 20)
@@ -59,7 +59,7 @@ module Api
       private
 
       def set_auction
-        @auction = Auction.includes(:category, :submitted_by_user, :opinions, images_attachments: :blob).find(params[:id])
+        @auction = Auction.includes(:category, :submitted_by_user, :opinions, :auction_images, images_attachments: :blob).find(params[:id])
       rescue ActiveRecord::RecordNotFound
         render json: { error: "Auction not found" }, status: :not_found
       end
@@ -87,7 +87,7 @@ module Api
             id: auction.submitted_by_user.id,
             username: auction.submitted_by_user.username
           },
-          images: auction.images.map { |img| rails_blob_url(img) },
+          images: collect_images(auction),
           created_at: auction.created_at,
           updated_at: auction.updated_at
         }
@@ -110,6 +110,12 @@ module Api
         end
 
         json
+      end
+
+      def collect_images(auction)
+        urls = []
+        urls.concat(auction.auction_images.where(deleted: false).pluck(:image_url).compact)
+        urls.uniq
       end
 
       def pagination_meta(collection)

@@ -16,7 +16,6 @@ class Opinion < ApplicationRecord
 
   validates :content, presence: true
   validates :author_type, presence: true
-  validates :verdict, presence: true
 
   def update_score!
     update(score: opinion_votes.sum(:vote_type))
