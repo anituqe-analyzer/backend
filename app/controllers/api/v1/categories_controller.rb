@@ -12,7 +12,7 @@ module Api
       end
 
       def show
-        @category = Category.includes(:parent, :children, :auctions).find(params[:id])
+        @category = Category.includes(:parent, :children, auctions: :auction_images).find(params[:id])
 
         render json: category_json(@category, include_auctions: true), status: :ok
       rescue ActiveRecord::RecordNotFound
@@ -37,6 +37,7 @@ module Api
               id: auction.id,
               title: auction.title,
               verification_status: auction.verification_status,
+              images: auction.auction_images.where(deleted: false).pluck(:image_url).compact.uniq,
               created_at: auction.created_at
             }
           end

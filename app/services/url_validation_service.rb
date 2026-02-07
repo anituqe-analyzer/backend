@@ -110,10 +110,9 @@ class UrlValidationService
         category: category
       )
 
-      # Save only the first image URL returned by the validator into `auction_images`
-      first_img = Array(data["image_urls"]).find(&:present?)
-      if first_img.present?
-        AuctionImage.create!(auction: auction, image_url: first_img)
+      image_urls = Array(data["image_urls"]).map(&:to_s).map(&:strip).reject(&:blank?).uniq
+      image_urls.each do |img_url|
+        AuctionImage.create!(auction: auction, image_url: img_url)
       end
 
       { success: true, auction: auction }
